@@ -5,7 +5,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "CoreLocation/CoreLocation.h"
+//#import "CoreLocation/CoreLocation.h"
 
 #define STRING_ALERT_MESSAGE_KARD_BUILDER_NAME_TOO_SHORT(a)             [NSString stringWithFormat:@"Please enter a %@ name of at least 2 characters", a]
 #define STRING_ALERT_MESSAGE_KARD_BUILDER_NAME_MUST_BE_AVAILABLE(a)     [NSString stringWithFormat:@"Sorry, please enter a %@ name with only standard letters a-z, standard numbers 0-9,  or hyphen", a]

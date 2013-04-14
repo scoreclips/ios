@@ -186,6 +186,7 @@
 			[cell.countLabel setText:[NSString stringWithFormat:@"%d", [fileObject1 numberOfSubitems]]];
 		else
 			[cell.countLabel setText:@"-"];
+        
 	} else {
 		[cell setIsFile:YES];
 		

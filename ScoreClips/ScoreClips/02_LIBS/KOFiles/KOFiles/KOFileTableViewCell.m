@@ -50,7 +50,7 @@
 #define KOFONT_FILES_TITLE [UIFont fontWithName:@"HelveticaNeue" size:18.0f]
 #define KOFONT_FILES_COUNTER [UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0f]
 #define KOFONT_FILES_SUBTITLE [UIFont fontWithName:@"HelveticaNeue-Bold" size:13.0f]
-#define KOFONT_FILES_SUBTITLE_VALUE [UIFont fontWithName:@"HelveticaNeue" size:13.0f]
+#define KOFONT_FILES_SUBTITLE_VALUE [UIFont fontWithName:@"HelveticaNeue" size:15.0f]
 
 @implementation KOFileTableViewCell
 
@@ -83,7 +83,7 @@
 		
 		titleTextField = [[UITextField alloc] init];
 		[titleTextField setFont:KOFONT_FILES_TITLE];
-
+        
 		//	[titleTextField setTextColor:[UIColor colorWithHexString:@"665b53"]];
 		[titleTextField setTextColor:KOCOLOR_FILES_TITLE];
 		
@@ -92,27 +92,32 @@
 		[titleTextField.layer setShadowOpacity:1.0f];
 		[titleTextField.layer setShadowRadius:0.0f];
 		
+        
 		[titleTextField setUserInteractionEnabled:NO];
 		[titleTextField setBackgroundColor:[UIColor clearColor]];
-		[titleTextField sizeToFit];
-        
+		//[titleTextField sizeToFit];
+        [titleTextField setMinimumFontSize:5];
+        [titleTextField setAdjustsFontSizeToFitWidth:YES];
+        //[titleTextField setTextAlignment:NSTextAlignmentJustified];
         // Trongv - move the title over all items
 		//[titleTextField setFrame:CGRectMake(108, 14, titleTextField.frame.size.width, titleTextField.frame.size.height)];
-        [titleTextField setFrame:CGRectMake(30, 5, titleTextField.frame.size.width, titleTextField.frame.size.height)];
+        [titleTextField setFrame:CGRectMake(30, 5, 280, 20)];
+        //[titleTextField setBackgroundColor:[UIColor redColor]];
+        //[titleTextField set:titleTextField.frame];
 		[self.contentView addSubview:titleTextField];
 		
 		
 		
-		createdLabel = [[UILabel alloc] initWithFrame:CGRectMake(108, 50, 54, 18)];
-		[createdLabel setText:@"Created:"];
-		[createdLabel setFont:KOFONT_FILES_SUBTITLE];
-		[createdLabel setTextColor:KOCOLOR_FILES_SUBTITLE];
-		[createdLabel setShadowColor:KOCOLOR_FILES_SUBTITLE_SHADOW];
-		[createdLabel setShadowOffset:CGSizeMake(0, 1)];
-		[createdLabel setBackgroundColor:[UIColor clearColor]];
-		[self.contentView addSubview:createdLabel];
+//		createdLabel = [[UILabel alloc] initWithFrame:CGRectMake(108, 50, 54, 18)];
+//		[createdLabel setText:@"Created:"];
+//		[createdLabel setFont:KOFONT_FILES_SUBTITLE];
+//		[createdLabel setTextColor:KOCOLOR_FILES_SUBTITLE];
+//		[createdLabel setShadowColor:KOCOLOR_FILES_SUBTITLE_SHADOW];
+//		[createdLabel setShadowOffset:CGSizeMake(0, 1)];
+//		[createdLabel setBackgroundColor:[UIColor clearColor]];
+//		[self.contentView addSubview:createdLabel];
 		
-		createdValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(168, 50, 70, 18)];
+		createdValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 25, 170, 40)];
 		[createdValueLabel setFont:KOFONT_FILES_SUBTITLE_VALUE];
 		[createdValueLabel setTextColor:KOCOLOR_FILES_SUBTITLE_VALUE];
 		[createdValueLabel setShadowColor:KOCOLOR_FILES_SUBTITLE_VALUE_SHADOW];
@@ -162,7 +167,8 @@
 		[countLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
 		[countLabel setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"item-counter"]]];
 		[countLabel setTextAlignment:UITextAlignmentCenter];
-		[countLabel setLineBreakMode:UILineBreakModeMiddleTruncation];
+		[countLabel setLineBreakMode:NSLineBreakByCharWrapping];
+        [countLabel setNumberOfLines:0];
 		[countLabel setFont:KOFONT_FILES_COUNTER];
 		[countLabel setTextColor:KOCOLOR_FILES_COUNTER];
 		[countLabel setShadowColor:KOCOLOR_FILES_COUNTER_SHADOW];

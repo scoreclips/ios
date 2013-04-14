@@ -81,7 +81,11 @@
     
 	for (NSMutableDictionary *clipInfo in jsonData) {
 		KOFileObject *fileObject = [[KOFileObject alloc] init];
-		[fileObject setBase:[NSString stringWithFormat:@"%@ - %@", [clipInfo objectForKey:@"team1"], [clipInfo objectForKey:@"team2"]]];
+        
+//        if ([clipInfo valueForKey:@"team1"] == nil) {
+//            NSLog(@"----%@",[clipInfo objectForKey:@"team1"]);
+//        }
+		[fileObject setBase:[clipInfo objectForKey:@"teams"]];
 		//[fileObject setPath:@"/"];
 		//[fileObject setAncestorFileObjects:[NSMutableArray array]];
 		//[fileObject setSizeNumber:[NSNumber numberWithUnsignedLongLong:0]];
@@ -89,7 +93,13 @@
 		//[fileObject setModifiedDate:[NSDate date]];
 		[fileObject setDirectory:YES];
 		//[fileObject setSizeNumber:[NSNumber numberWithInt:i]];
-		[fileObject setNumberOfSubitems:[[clipInfo objectForKey:@"videoclips"] count]];
+		//[fileObject setNumberOfSubitems:[[clipInfo objectForKey:@"videoclips"] count]];
+        
+        [fileObject setScoreString:[clipInfo objectForKey:@"score"]];
+        [fileObject setFinalScoreString:[clipInfo objectForKey:@"finalscore"]];
+        [fileObject setDescString:[clipInfo objectForKey:@"desciptions"]];
+        [fileObject setSourceUrl:[clipInfo objectForKey:@"sourceURL"]];
+        
 		//[fileObject setSizeString:[NSString stringWithFormat:@"0 B"]];
 		[fileObject setCreatedString:[clipInfo objectForKey:@"date"]];
 		//[fileObject setModifiedString:@"0 seconds ago"];

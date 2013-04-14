@@ -17,6 +17,7 @@
 #import "KOFileObject.h"
 #import "KOMenuObject.h"
 #import "KOSegmentedControl.h"
+#import "WebViewController.h"
 
 @interface ScoreClipsViewController () {
     V8HorizontalPickerView                  *pickerView;
@@ -230,10 +231,17 @@
 		[cell.sizeLabel setHidden:YES];
 		[cell.sizeValueLabel setHidden:YES];
 		
-		if ([fileObject1 numberOfSubitems])
-			[cell.countLabel setText:[NSString stringWithFormat:@"%d", [fileObject1 numberOfSubitems]]];
-		else
-			[cell.countLabel setText:@"-"];
+        [cell.countLabel setText:[fileObject1 scoreString]];
+        if ([fileObject1 finalScoreString]) {
+            [cell.countLabel setText:[fileObject1 finalScoreString]];
+        }
+		if ([fileObject1 scoreString] && [fileObject1 finalScoreString])
+			[cell.countLabel setText:[NSString stringWithFormat:@"%@\n[%@]",[fileObject1 scoreString],[fileObject1 finalScoreString]]];
+        
+        if (![fileObject1 scoreString] && ![fileObject1 finalScoreString]) {
+            [cell.countLabel setHidden:YES];
+        }
+            
 	} else {
 		[cell setIsFile:YES];
 		
@@ -246,11 +254,11 @@
 	}
 	
 	[cell.titleTextField setText:[fileObject1 base]];
-	[cell.titleTextField sizeToFit];
+	//[cell.titleTextField sizeToFit];
 	
-	[cell.createdValueLabel setText:[fileObject1 createdString]];
+	[cell.createdValueLabel setText:[fileObject1 descString]];
 	[cell.sizeValueLabel setText:[fileObject1 sizeString]];
-	[cell.changedValueLabel setText:[fileObject1 modifiedString]];
+	//[cell.changedValueLabel setText:[fileObject1 descString]];
 	
 	[cell setDelegate:(id<KOFileTableViewCellDelegate>)self];
 	[cell setIndexPath:indexPath];
@@ -443,7 +451,14 @@
         IntroVideoViewController *temVC = [[IntroVideoViewController alloc] initWithNibName:@"IntroVideoViewController" bundle:nil];
         temVC.URLClips = self.fileObject.ancestorFileObjects;
         [self presentViewController:temVC animated:YES completion:nil];
+    } 
+
+    if (i == 1 && self.fileObject.sourceUrl) {
+        WebViewController *temVC = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:[NSBundle mainBundle]];
+        temVC.urlString = self.fileObject.sourceUrl;
+        [self presentViewController:temVC animated:YES completion:nil];
     }
+
 }
 
 #pragma mark - KOFileTableViewDelegate

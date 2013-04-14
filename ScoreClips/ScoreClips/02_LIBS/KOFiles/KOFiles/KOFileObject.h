@@ -48,6 +48,10 @@
 @property (nonatomic, strong) NSMutableArray *ancestorFileObjects;
 @property (nonatomic) NSInteger submersionLevel;
 
+
+// TrongV
+@property (nonatomic, strong) NSString *scoreString, *finalScoreString, *descString, *sourceUrl;
+
 - (BOOL)isDirectory;
 - (BOOL)isEqualToFileObject:(KOFileObject *)fileObject;
 

@@ -237,12 +237,12 @@ static libUserInterfaceIdiom g_interfaceIdiom = libUserInterfaceIdiomUnknown;
     return ma_Sort;
 }
 
-+ (NSString *)getStringDistanceFromLocation:(CLLocation *)fromLoc toLocation:(CLLocation *)toLoc {
-    CLLocationDistance kilometers = [fromLoc distanceFromLocation:toLoc] / 1000; 
-//    CLLocationDistance meters = [fromLoc distanceFromLocation:toLoc];
-    
-    return [NSString stringWithFormat:@"%.2fKm", kilometers];
-}
+//+ (NSString *)getStringDistanceFromLocation:(CLLocation *)fromLoc toLocation:(CLLocation *)toLoc {
+//    CLLocationDistance kilometers = [fromLoc distanceFromLocation:toLoc] / 1000; 
+////    CLLocationDistance meters = [fromLoc distanceFromLocation:toLoc];
+//    
+//    return [NSString stringWithFormat:@"%.2fKm", kilometers];
+//}
 
 + (NSString *)getStringDistanceFromMeter:(double)meters {
 //    int feet = meters; // Server: return to inches

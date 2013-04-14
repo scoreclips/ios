@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA118CC9171B229F004DC9ED /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA118CC8171B229F004DC9ED /* WebViewController.m */; };
+		AA118CCC171B254B004DC9ED /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA118CCB171B254B004DC9ED /* WebViewController.xib */; };
 		AA23A0C11716E9E800E202BB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA23A0C01716E9E800E202BB /* UIKit.framework */; };
 		AA23A0C31716E9E800E202BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA23A0C21716E9E800E202BB /* Foundation.framework */; };
 		AA23A0C51716E9E800E202BB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA23A0C41716E9E800E202BB /* CoreGraphics.framework */; };
@@ -164,6 +166,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA118CC7171B229F004DC9ED /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		AA118CC8171B229F004DC9ED /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		AA118CCB171B254B004DC9ED /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		AA23A0BD1716E9E800E202BB /* ScoreClips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreClips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA23A0C01716E9E800E202BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AA23A0C21716E9E800E202BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -511,6 +516,9 @@
 				AA23A1F71716FCAF00E202BB /* AppViewController.m */,
 				AA23A0FC1716ECC400E202BB /* ScoreClipsViewController.h */,
 				AA23A0FD1716ECC400E202BB /* ScoreClipsViewController.m */,
+				AA118CC7171B229F004DC9ED /* WebViewController.h */,
+				AA118CC8171B229F004DC9ED /* WebViewController.m */,
+				AA118CCB171B254B004DC9ED /* WebViewController.xib */,
 				AA6791E51717B56B00418F89 /* IntroVideoViewController.h */,
 				AA6791E41717B56B00418F89 /* IntroVideoViewController.m */,
 				AA6791E31717B56B00418F89 /* IntroVideoViewController.xib */,
@@ -1059,6 +1067,7 @@
 				AA882FF817196AD800CBD58C /* Icon@2x.png in Resources */,
 				AA882FF917196AD800CBD58C /* iTunesArtwork.png in Resources */,
 				AA882FFD1719952500CBD58C /* title_bar_bg.png in Resources */,
+				AA118CCC171B254B004DC9ED /* WebViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1131,6 +1140,7 @@
 				AA6792F0171845AC00418F89 /* KOMenuObject.m in Sources */,
 				AA6792F1171845AC00418F89 /* KOSegmentedControl.m in Sources */,
 				AA6792FD1718A2FF00418F89 /* V8HorizontalPickerView.m in Sources */,
+				AA118CC9171B229F004DC9ED /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
