@@ -578,7 +578,7 @@
         
         
         [pickerView reloadData];
-        [pickerView scrollToElement:0 animated:YES];
+        [pickerView scrollToElement:1 animated:YES];
 
     }
 }
@@ -596,17 +596,20 @@
 
 #pragma mark - HorizontalPickerView DataSource Methods
 - (NSInteger)numberOfElementsInHorizontalPickerView:(V8HorizontalPickerView *)picker {
-	return [_scoreDates count];
+	return [_scoreDates count] + 1;
 }
 
 #pragma mark - HorizontalPickerView Delegate Methods
 - (NSString *)horizontalPickerView:(V8HorizontalPickerView *)picker titleForElementAtIndex:(NSInteger)index {
-    return [NSString stringWithFormat:@"%@", [_scoreDates objectAtIndex:index]];
+    if (index == 0) {
+        return @"Refresh";
+    }
+    return [NSString stringWithFormat:@"%@", [_scoreDates objectAtIndex:index-1]];
 }
 
 -(UIView *)horizontalPickerView:(V8HorizontalPickerView *)picker viewForElementAtIndex:(NSInteger)index
 {
-    return [_scoreDates objectAtIndex:index];
+    return [_scoreDates objectAtIndex:(index-1)];
 }
 
 - (NSInteger) horizontalPickerView:(V8HorizontalPickerView *)picker widthForElementAtIndex:(NSInteger)index {
@@ -625,10 +628,15 @@
 - (void)horizontalPickerView:(V8HorizontalPickerView *)picker didSelectElementAtIndex:(NSInteger)index {
     
     NSLog(@"Selected index %d", index);
-    _scoreIndex = index;
-//    [AppDataManager AppDataManagerShared].delegate = self;
-//    [[AppDataManager AppDataManagerShared] getDataType:ENUM_API_REQUEST_TYPE_GET_SCORE_CLIPS forceUpdate:NO];
-    [self requestData:ENUM_API_REQUEST_TYPE_GET_SCORE_CLIPS];
+    _scoreIndex = index - 1;
+    
+    if (index == 0) {
+        [self requestData:ENUM_API_REQUEST_TYPE_GET_SCORE_DATES];
+    } else {
+    //    [AppDataManager AppDataManagerShared].delegate = self;
+    //    [[AppDataManager AppDataManagerShared] getDataType:ENUM_API_REQUEST_TYPE_GET_SCORE_CLIPS forceUpdate:NO];
+        [self requestData:ENUM_API_REQUEST_TYPE_GET_SCORE_CLIPS];
+    }
 }
 
 @end
