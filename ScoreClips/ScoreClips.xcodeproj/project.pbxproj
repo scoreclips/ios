@@ -536,7 +536,6 @@
 				AA23A1361716EE0900E202BB /* FontLabel */,
 				AA23A1621716EE0900E202BB /* JSON */,
 				AA23A1821716EE0900E202BB /* SD_WEBIMAGE */,
-				AA23A1931716EE0A00E202BB /* TWITTER */,
 			);
 			path = 02_LIBS;
 			sourceTree = "<group>";
@@ -681,93 +680,6 @@
 				AA23A1921716EE0A00E202BB /* UIImageView+WebCache.m */,
 			);
 			path = SD_WEBIMAGE;
-			sourceTree = "<group>";
-		};
-		AA23A1931716EE0A00E202BB /* TWITTER */ = {
-			isa = PBXGroup;
-			children = (
-				AA23A1941716EE0A00E202BB /* Libraries & Headers */,
-				AA23A1961716EE0A00E202BB /* MGTwitterEngine */,
-				AA23A1971716EE0A00E202BB /* OAuth */,
-				AA23A19D1716EE0A00E202BB /* SAOAuthTwitterEngine */,
-			);
-			path = TWITTER;
-			sourceTree = "<group>";
-		};
-		AA23A1941716EE0A00E202BB /* Libraries & Headers */ = {
-			isa = PBXGroup;
-			children = (
-				AA23A1951716EE0A00E202BB /* OAuthConsumer */,
-			);
-			path = "Libraries & Headers";
-			sourceTree = "<group>";
-		};
-		AA23A1951716EE0A00E202BB /* OAuthConsumer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = OAuthConsumer;
-			sourceTree = "<group>";
-		};
-		AA23A1961716EE0A00E202BB /* MGTwitterEngine */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MGTwitterEngine;
-			sourceTree = "<group>";
-		};
-		AA23A1971716EE0A00E202BB /* OAuth */ = {
-			isa = PBXGroup;
-			children = (
-				AA23A1981716EE0A00E202BB /* Guts */,
-				AA23A19A1716EE0A00E202BB /* Protocols */,
-				AA23A19B1716EE0A00E202BB /* User Interface */,
-			);
-			path = OAuth;
-			sourceTree = "<group>";
-		};
-		AA23A1981716EE0A00E202BB /* Guts */ = {
-			isa = PBXGroup;
-			children = (
-				AA23A1991716EE0A00E202BB /* Crypto */,
-			);
-			path = Guts;
-			sourceTree = "<group>";
-		};
-		AA23A1991716EE0A00E202BB /* Crypto */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Crypto;
-			sourceTree = "<group>";
-		};
-		AA23A19A1716EE0A00E202BB /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		AA23A19B1716EE0A00E202BB /* User Interface */ = {
-			isa = PBXGroup;
-			children = (
-				AA23A19C1716EE0A00E202BB /* Resources */,
-			);
-			path = "User Interface";
-			sourceTree = "<group>";
-		};
-		AA23A19C1716EE0A00E202BB /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		AA23A19D1716EE0A00E202BB /* SAOAuthTwitterEngine */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SAOAuthTwitterEngine;
 			sourceTree = "<group>";
 		};
 		AA23A2191716FE4300E202BB /* 06_DATA_MANAGER */ = {
