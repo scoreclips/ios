@@ -1,0 +1,40 @@
+//
+//  ImplicitRequester.h
+//  VISIKARD
+//
+//  Created by Phan Ba Minh on 11/6/12.
+//
+//
+
+#import <Foundation/Foundation.h>
+#import "APIRequester.h"
+#import "UserDataManager.h"
+#import "KardBuilderObject.h"
+
+#define INT_IMPLICIT_REQUESTER_NUMBER_LOOP_MAX                          5
+
+//typedef enum {
+//    enumAutomationDataIsReady_Invalid,
+//    enumAutomationDataIsReady_ForHome_BeforeEntering,
+//    enumAutomationDataIsReady_ForHome_ReloadingHomeImage,
+//    enumAutomationDataIsReady_ForHome_ReloadingHomeImage_Shaking,
+//    enumAutomationDataIsReady_ForRegister_CreatingAccount,
+//    enumAutomationDataIsReady_ForKardBuilder_SavingKard,
+//    enumAutomationDataIsReady_ForSimpleKard_DeletingKard,
+//    enumAutomationDataIsReady_ForSimpleKard_MakingDefaultKard,
+//    enumAutomationDataIsReady_ForSimpleKard_ApprovingKard,
+//    enumAutomationDataIsReady_ForKonnectSetting_SettingDefaultKard,
+//    enumAutomationDataIsReady_ForKonnect_UpdateUserLocation,
+//    enumAutomationDataIsReady_ForKonnect_GetPendingKards,
+//    enumAutomationDataIsReady_ForAutomation
+//}enumImplicitRequesterIsRe;
+
+@interface ImplicitRequester : NSObject <APIRequesterProtocol> {
+    APIRequester                                *_APIRequester;
+}
+
+- (void)update;
+- (void)requestUploadOriginalImage:(UIImage *)img andKardId:(int)kardID andKardType:(enumKardBuilderType)kardType;
++ (ImplicitRequester *)Shared;
+
+@end

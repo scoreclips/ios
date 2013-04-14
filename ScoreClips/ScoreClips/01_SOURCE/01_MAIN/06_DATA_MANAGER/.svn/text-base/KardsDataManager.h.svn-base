@@ -1,0 +1,416 @@
+//
+//  KardsDataManager.h
+//  VISIKARD
+//
+//  Created by Admin on 5/24/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "Define.h"
+#import <MapKit/MapKit.h>
+#import "SDWebImageManager.h"
+
+typedef enum {
+    enumIsDataMine_Invalid,
+    enumIsDataMine_isMine,
+    enumIsDataMine_isMyKard,
+    enumIsDataMine_isMyDeal,
+    enumIsDataMine_isMySeed,
+    enumIsDataMine_isMyPromoted,
+}enumIsDataMine;
+
+typedef enum {
+    enumKardsTradeType_Invalid,
+    enumKardsTradeType_MyKardsPending, // Waiting for my approve
+    enumKardsTradeType_MyKardsApproving, // Waiting for an another approve
+    enumKardsTradeType_MyKardsTraded,
+    enumKardsTradeType_MyKardsTraded_Hidden,
+    enumKardsTradeType_MyKardsTraded_OneConnection,
+    enumKardsTradeType_KonnectUntraded_Calling,
+    enumKardsTradeType_KonnectUntraded,
+    enumKardsTradeType_KonnectPending, // Waiting for my approve
+    enumKardsTradeType_KonnectPending_Traded,
+    enumKardsTradeType_KonnectApproving, // Waiting for an another approve
+    enumKardsTradeType_KonnectApproving_Traded,
+    enumKardsTradeType_KonnectTraded,
+    enumKardsTradeType_KonnectTraded_Hidden,
+    enumKardsTradeType_DealPurchased,
+    enumKardsTradeType_DealUnpurchased,
+    enumKardsTradeType_DealUnpurchased_Calling,
+    enumKardsTradeType_DealPending,
+    enumKardsTradeType_DealApproving
+}enumKardsTradeType;
+
+typedef enum {
+    eHasNotChild = 0,
+    eChildIsNode,
+    eChildIsCategory,
+    eChildIsCategoryAndNode
+}enumChildOfCategory;
+
+typedef enum {
+    eIsDataAddInvalid = -1,
+    eIsDataAddNull,
+    eIsDataAddHasSameNameInAGroup,
+    eIsDataAddHasSameKardsIDInAGroup,
+    eIsDataAddSearchContinue,
+    eIsDataAddSearchFail,
+    eIsDataAddFailChildIsNode,
+    eIsDataAddFailChildIsCategory,
+    eIsDataAddSuccess
+}enumIsDataAdd;
+
+typedef enum {
+    enumIsDataRemove_Invalid,
+    enumIsDataRemove_DataIsNil,
+    enumIsDataRemove_Continuous,
+    enumIsDataRemove_NotExist,
+    enumIsDataRemove_Successful
+}enumIsDataRemove;
+
+typedef enum {
+    enumIsLocalCopyType_Invalid,
+    enumIsLocalCopyType_FromServer,
+    enumIsLocalCopyType_Copy,
+    enumIsLocalCopyType_Move
+}enumIsLocalCopyType;
+
+typedef enum {
+    enumKardType_Invalid,
+    enumKardType_Person = 1,
+    enumKardType_Business = 2,
+    enumKardType_Event = 3,
+    enumKardType_Deal = 4,
+    enumKardType_Place = 6,
+    enumKardType_Album = 8,
+    enumKardType_Localese = 9
+}enumKardType;
+
+typedef enum {
+    enumKardKonnectLabel_Invalid = -1,
+    enumKardKonnectLabel_Name = 1,
+    enumKardKonnectLabel_Distance,
+    enumKardKonnectLabel_Occurrent,
+    enumKardKonnectLabel_Date,
+}enumKardKonnectLabel;
+
+@interface KardsNodeData : NSObject <MKAnnotation, SDWebImageManagerDelegate> {
+    NSString                    *kardsName;
+    NSString                    *kardsID;
+	NSString                    *kardsUserID;
+    UIImage                     *kardsSmallAvatar;
+    UIImage                     *kardsMediumAvatar;
+    UIImage                     *kardsLargeAvatar;
+    CLLocationCoordinate2D      coordinate;
+    NSString                    *kardsType;
+    NSMutableDictionary         *kardsOpptions;
+    NSString                    *kardsSmallAvatarURL;
+    NSString                    *kardsMediumAvatarURL;
+    NSString                    *kardsLargeAvatarURL;
+    float                       dealDistance;
+    NSString                    *dealAddress;
+    NSString                    *dealHeadLine;
+    NSInteger                   dealRedeemed;
+    NSInteger                   dealPendding;
+    NSInteger                   dealUserPassed;
+    NSString                   *dealCategory;
+    NSString                    *konnectVisibility;
+    NSString                    *profileID;
+    NSInteger                   hideThisKard;
+    NSString                    *hideKardDate;
+    NSInteger                   isHide;
+    NSString                    *tags;
+    
+    NSString                    *feedsComment;
+    NSString                    *feedsFullName;
+    NSInteger                   feedsFkProfile;
+    NSString                    *feedsTitle;
+    NSString                    *feedsMedia;
+    NSInteger                   feedsIdNews;
+    NSInteger                   feedsCountResponse;
+    NSInteger                   feedsCountLike;
+    NSString                    *feedsDateCreated;
+    NSInteger                   feedsIsLike;
+    NSInteger                   feedsCountUnLike;
+    NSInteger                   feedsIsUnLike;
+    NSInteger                   feedsIsPrioritize;
+    NSString                    *dealID;
+    NSInteger                   feedIsRead;
+    NSString                    *redeemedCode;
+    
+    NSString *rewardAddress;
+    NSString *rewardState;
+    NSString *rewardCountry;
+    NSString *rewardDescription;
+    NSString *rewardPhone;
+    NSString *rewardCity;
+    NSString *rewardLat;
+    NSString *rewardLng;
+    NSInteger productType;
+    NSString *rewardTitle;
+    NSString *rewardDateCreated;
+    NSString *rewardDistanceUser;
+    NSInteger rewardProductId;
+    NSString *rewardProductTYpeName;
+    NSInteger rewardSalePrice;
+    NSInteger rewardOrignPrice;
+    NSInteger rewardZipCode;
+    NSInteger rewardPoints;
+    
+    NSInteger isAlbumKard;
+    NSInteger isBusinessKard;
+
+    NSInteger isKardShareable;
+
+
+}
+- (id)initWithKardsName:(NSString *)strName 
+             andKardsID:(NSString *)strID
+    andKardsSmallAvatar:(UIImage *)imgSmallAvatar;
+
+@property (nonatomic, retain) NSString                  *kardsName;
+@property (nonatomic, retain) NSString                  *kardsID;
+@property (nonatomic, retain) NSString                  *kardsFriendID;
+@property (nonatomic, retain) UIImage                   *kardsSmallAvatar;
+@property (nonatomic, retain) UIImage                   *kardsMediumAvatar;
+@property (nonatomic, retain) UIImage                   *kardsLargeAvatar;
+@property (nonatomic, assign) NSInteger                 kardType;
+@property (nonatomic, retain) NSMutableDictionary       *kardsOpptions;
+@property (nonatomic, retain) NSString                  *kardsSmallAvatarURL;
+@property (nonatomic, retain) NSString                  *kardsMediumAvatarURL;
+@property (nonatomic, retain) NSString                  *kardsLargeAvatarURL;
+@property (nonatomic, retain) NSString                  *kardsUserID;
+@property (nonatomic, retain) NSString                  *kardsTradeKonnectId;
+@property (nonatomic, retain) NSString                  *kardsIsMyDefault;
+@property (nonatomic, retain) NSString                  *kardsFeedNumber;
+@property (nonatomic, assign) NSInteger                 hideThisKard;
+@property (nonatomic, retain) NSString                  *hideKardDate;
+@property (nonatomic, retain) NSString                  *kardsDeckName;
+@property (nonatomic, assign) NSInteger                 isHide;
+@property (nonatomic, retain) NSString                  *tags;
+@property (nonatomic, retain) NSString                  *phoneNumberHome;
+@property (nonatomic, retain) NSString                  *phoneNumberWork;
+@property (nonatomic, retain) NSString                  *phoneNumberCell;
+@property (nonatomic, retain) NSString                  *kardAddress;
+@property (nonatomic, retain) NSString                  *cityName;
+@property (nonatomic, retain) NSString                  *kardsPhone;
+
+@property (nonatomic, assign) float                     dealDistance;
+@property (nonatomic, retain) NSString                  *dealAddress;
+@property (nonatomic, retain) NSString                  *dealHeadLine;
+@property (nonatomic, assign) NSInteger                 dealRedeemed;
+@property (nonatomic, assign) NSInteger                 dealPendding;
+@property (nonatomic, assign) NSInteger                 dealUserPassed;
+@property (nonatomic, retain) NSString                  *dealMerchantName;
+@property (nonatomic, assign) NSInteger                 dealPricevalue;
+@property (nonatomic, assign) NSInteger                 dealDiscountvalue;
+@property (nonatomic, retain) NSString                  *dealCity;
+@property (nonatomic, retain) NSString                  *dealCategory;
+
+@property (nonatomic, retain) NSString                  *profileID;
+@property (nonatomic) enumKardsTradeType                kardsTradeType;
+@property (nonatomic) enumIsDataMine                    isMine;
+@property (nonatomic, retain) NSString                  *kardsNumberWaitingArrove;
+@property (nonatomic) enumIsLocalCopyType               isLocalCopyType;
+
+@property (nonatomic, retain) NSString                  *konnectVisibility;
+@property (nonatomic, retain) NSString                  *konnectDistanceMap;
+@property (nonatomic, retain) NSString                  *konnectDistanceUser;
+@property (nonatomic, retain) NSString                  *konnectMutualKards;
+@property (nonatomic)  enumKardKonnectLabel             konnectKonnectLabel;
+@property (nonatomic, retain) NSString                  *konnectIsHidden;
+@property (nonatomic, retain) NSString                  *konnectHiddenDate;
+@property (nonatomic, retain) NSString                  *konnectUserIsOnline;
+@property (nonatomic, retain) NSString                  *konnectRequestingNumber;
+@property (nonatomic, retain) NSString                  *konnectBusinessCategory;
+@property (nonatomic, retain) NSString                  *konnectBusinessCategoryID;
+@property (nonatomic, retain) NSString                  *konnectLocalSubCategoryName1;
+@property (nonatomic, retain) NSString                  *konnectLocalSubCategoryName2;
+@property (nonatomic, retain) NSString                  *konnectLocalHouseAddress;
+@property (nonatomic, retain) NSString                  *konnectLocalCityAddress;
+
+@property  (nonatomic, retain) NSString                 *feedsComment;
+@property  (nonatomic, retain) NSString                 *feedsFullName;
+@property  (nonatomic, assign) NSInteger                feedsFkProfile;
+@property  (nonatomic, retain) NSString                 *feedsTitle;
+@property  (nonatomic, retain) NSString                 *feedsMedia;
+@property  (nonatomic, assign) NSInteger                feedsIdNews;
+@property  (nonatomic, assign) NSInteger                feedsCountResponse;
+@property  (nonatomic, assign) NSInteger                feedsCountLike;
+@property  (nonatomic, retain) NSString                 *feedsDateCreated;
+@property  (nonatomic, assign) NSInteger                feedsIsLike;
+@property  (nonatomic, assign) NSInteger                feedsCountUnLike;
+@property  (nonatomic, assign) NSInteger                feedsIsUnLike;
+@property  (nonatomic, assign) NSInteger                feedsIsPrioritize;
+@property  (nonatomic, retain) NSString                 *postBackKard;
+@property  (nonatomic, retain) NSString                 *mediaThumb;
+@property  (nonatomic, assign) NSInteger                 feedIsRead;
+
+@property (nonatomic, assign) float                     latitude;
+@property (nonatomic, assign) float                     longitude;
+@property (nonatomic, retain) NSString                  *merchantName;
+@property (nonatomic, assign) NSInteger                 pricevalue;
+@property (nonatomic, assign) NSInteger                 discountvalue;
+@property (nonatomic, retain) NSString                  *dealredeemeddate;
+@property (nonatomic, retain) NSString                  *descriptionvalue;
+@property (nonatomic, retain) NSString                  *dealID;
+@property (nonatomic, retain) NSString                  *redeemedCode;
+
+@property (nonatomic, readwrite) CLLocationCoordinate2D coordinate;
+@property (nonatomic, retain) NSString                  *titletext;
+@property (nonatomic, retain) NSString                  *subtitletext;
+
+@property  (nonatomic, retain) NSString *rewardAddress;
+@property  (nonatomic, retain) NSString *rewardState;
+@property  (nonatomic, retain) NSString *rewardCountry;
+@property  (nonatomic, retain) NSString *rewardDescription;
+@property  (nonatomic, retain) NSString *rewardPhone;
+@property  (nonatomic, retain) NSString *rewardCity;
+@property  (nonatomic, retain) NSString *rewardLat;
+@property  (nonatomic, retain) NSString *rewardLng;
+@property  (nonatomic, assign) NSInteger productType;
+@property  (nonatomic, retain) NSString *rewardTitle;
+@property  (nonatomic, retain) NSString *rewardDateCreated;
+@property  (nonatomic, retain) NSString *rewardDistanceUser;
+@property  (nonatomic, assign) NSInteger rewardProductId;
+@property  (nonatomic, retain) NSString *rewardProductTYpeName;
+@property  (nonatomic, assign) NSInteger rewardSalePrice;
+@property  (nonatomic, assign) NSInteger rewardOrignPrice;
+@property  (nonatomic, assign) NSInteger rewardZipCode;
+@property  (nonatomic, assign) NSInteger rewardPoints;
+
+@property  (nonatomic, assign) NSInteger isAlbumKard;
+@property  (nonatomic, assign) NSInteger isBusinessKard;
+
+@property  (nonatomic, retain) NSString  *parentKards;
+@property  (nonatomic, retain) NSString  *lastName;
+@property  (nonatomic, retain) NSString  *firstName;
+@property  (nonatomic, retain) NSString  *dateCreated;
+@property  (nonatomic, retain) NSString  *description;
+@property  (nonatomic, retain) NSString  *dateUpdate;
+@property  (nonatomic, retain) NSString  *kardOwner;
+@property  (nonatomic, retain) NSString  *kardOwnerImageUrl;
+@property  (nonatomic, retain) NSString  *kardOwnerName;
+@property  (nonatomic, assign) NSInteger isShare;
+
+@property  (nonatomic, retain) NSString  *kardBannerUrl;
+@property (nonatomic, retain) UIImage    *kardBannerImage;
+
+@property  (nonatomic, assign) NSInteger  isSelected;
+
+
+- (NSString *)subtitle;
+- (NSString *)title;
+- (void)setTitle:(NSString*)strTitle;
+- (void)setSubTitle:(NSString*)strSubTitle;
+
+@end
+
+@interface KardsCategoryData : KardsNodeData {
+@private
+    NSMutableArray                      *categoryArray;
+    unsigned int                        kardsDeepLevel;
+    BOOL                                isHidden;
+    enumChildOfCategory                 isChildOfCategory;
+}
+- (enumIsDataAdd)addNode:(KardsNodeData *)node;
+- (enumIsDataAdd)addNode:(KardsNodeData *)node atKardsID:(NSString *)strID;
+- (enumIsDataAdd)addCategory:(KardsCategoryData *)node;
+- (enumIsDataAdd)addCategory:(KardsCategoryData *)node atKardsID:(NSString *)strID;
+- (NSMutableArray *)AllCategoriesWithKardsID:(NSString *)strID;
+- (NSMutableArray *)AllKardsWithKardsID:(NSString *)strId;
+
+- (BOOL)checkImInhere:(KardsNodeData *)node;
+- (enumIsDataRemove)removeCategoriesWithKardsID:(NSString *)strID;
+- (enumIsDataRemove)removeKardsWithKardsID:(NSString *)strID;
+- (enumIsDataRemove)removeCategories:(KardsCategoryData *)node;
+- (enumIsDataRemove)removeKards:(KardsNodeData *)node;
+- (enumIsDataRemove)removeDataFromServer;
+- (void)resetAllData;
+
+@property (nonatomic) unsigned int  kardsDeepLevel;
+@property (nonatomic, readonly) enumChildOfCategory isChildOfCategory;
+@property (nonatomic, readonly) BOOL isHidden;
+@property (nonatomic, readonly) NSMutableArray *AllNode;
+@property (nonatomic, readonly) NSMutableArray *CurrentCategory;
+@property (nonatomic, readonly) NSMutableArray *CurrentNode;
+@property (nonatomic, readonly) NSMutableArray *categoryArray;
+
+@end
+
+@interface KardsTableData : NSObject {
+@private
+    NSMutableArray      *categoryArray;
+}
+@property (nonatomic, readonly) NSMutableArray *AllNode;
+@property (nonatomic, readonly) NSMutableArray *CurrentCategory;
+@property (nonatomic, readonly) NSMutableArray *CurrentNode;
+@property (nonatomic, readonly) NSMutableArray *categoryArray;
+- (NSMutableArray *)AllCategoriesWithKardsID:(NSString *)strID;
+- (NSMutableArray *)AllKardsWithKardsID:(NSString *)strID;
+- (enumIsDataAdd)addNode:(KardsNodeData *)node;
+- (enumIsDataAdd)addNode:(KardsNodeData *)node atKardsID:(NSString *)strID;
+- (enumIsDataAdd)addCategory:(KardsCategoryData *)node atKardsID:(NSString *)strID;
+- (enumIsDataAdd)addCategory:(KardsCategoryData *)node;
+
+- (enumIsDataRemove)removeCategoriesWithKardsID:(NSString *)strID;
+- (enumIsDataRemove)removeKardsWithKardsID:(NSString *)strID;
+- (void)resetAllData;
+- (enumIsDataRemove)removeCategories:(KardsCategoryData *)node;
+- (enumIsDataRemove)removeKards:(KardsNodeData *)node;
+- (enumIsDataRemove)removeDataFromServer;
+
+@end
+
+@interface KardsDataManager : NSObject {
+    KardsTableData      *rootData;
+}
+@property (nonatomic, readonly) NSMutableArray *AllNode;
+@property (nonatomic, readonly) NSMutableArray *CurrentCategory;
+@property (nonatomic, readonly) NSMutableArray *CurrentNode;
+@property (nonatomic, readonly) NSMutableArray *categoryArray;
+- (enumIsDataAdd)addCategory:(KardsCategoryData *)node;
+- (enumIsDataAdd)addCategory:(KardsCategoryData *)node atKardsID:(NSString *)strID;
+- (enumIsDataAdd)addNode:(KardsNodeData *)node;
+- (enumIsDataAdd)addNode:(KardsNodeData *)node atKardsID:(NSString *)strID;
+- (NSMutableArray *)AllCategoriesWithKardsID:(NSString *)strID;
+- (NSMutableArray *)AllKardsWithKardsID:(NSString *)strID;
+- (KardsCategoryData *)getMECategory;
+- (KardsCategoryData *)getAlbumCategory;
+- (KardsCategoryData *)getSeedCategory;
+- (KardsCategoryData *)getPromotedCategory;
+- (KardsCategoryData *)getTrendingCategory;
+- (KardsCategoryData *)getDealCategory;
+- (NSString *)getNewCategoryID;
+
+- (enumIsDataRemove)removeCategoriesWithKardsID:(NSString *)strID;
+- (enumIsDataRemove)removeKardsWithKardsID:(NSString *)strID;
+- (void)resetAllData;
+- (enumIsDataRemove)removeCategories:(KardsCategoryData *)node;
+- (enumIsDataRemove)removeKards:(KardsNodeData *)node;
+- (enumIsDataRemove)removeDataFromServer;
+
++ (KardsDataManager *)kardsShared;
++ (KardsDataManager *)homeKardsShared;
+
++ (KardsDataManager *)konnectShared;
++ (KardsDataManager *)konnectPersonalShared;
++ (KardsDataManager *)konnectBusinessesShared;
++ (KardsDataManager *)konnectEventsShared;
++ (KardsDataManager *)konnectPlacesShared;
++ (KardsDataManager *)konnectCustomShared;
++ (KardsDataManager *)konnectPendingShared;
++ (KardsDataManager *)konnectSearchShared;
++ (KardsDataManager *)konnectHomeShared;
+
++ (KardsDataManager *)dealsShared;
++ (KardsDataManager *)feedsShared;
++ (KardsDataManager *)feedsCommentsShared;
++ (KardsDataManager *)actMyDealsShared;
++ (KardsDataManager *)preMyDealsShared;
++ (KardsDataManager *)dealNearLocationShared;
+
++ (KardsDataManager *)walletShared;
+
+@end
