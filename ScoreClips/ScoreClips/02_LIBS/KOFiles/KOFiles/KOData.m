@@ -99,6 +99,7 @@
         [fileObject setFinalScoreString:[clipInfo objectForKey:@"finalscore"]];
         [fileObject setDescString:[clipInfo objectForKey:@"desciptions"]];
         [fileObject setSourceUrl:[clipInfo objectForKey:@"sourceURL"]];
+        [fileObject setSourceString:[clipInfo objectForKey:@"source"]];
         
 		//[fileObject setSizeString:[NSString stringWithFormat:@"0 B"]];
 		[fileObject setCreatedString:[clipInfo objectForKey:@"date"]];
@@ -146,7 +147,10 @@
 	[exportObject setIconOn:@"icon-export2"];
 	[exportObject setIconOff:@"icon-export1"];
 	
-	return [NSArray arrayWithObjects:viewObject, copyObject, moveObject, renameObject, deleteObject, exportObject, nil];
+	//return [NSArray arrayWithObjects:viewObject, copyObject, moveObject, renameObject, deleteObject, exportObject, nil];
+    
+    
+	return [NSArray arrayWithObjects:viewObject, copyObject, nil];
 }
 
 

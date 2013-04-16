@@ -228,10 +228,16 @@
 		
 		[cell.changedLabel setHidden:YES];
 		[cell.changedValueLabel setHidden:YES];
-		[cell.sizeLabel setHidden:YES];
-		[cell.sizeValueLabel setHidden:YES];
+        
+		[cell.sizeLabel setHidden:NO];
+		[cell.sizeValueLabel setHidden:NO];
 		
         [cell.countLabel setText:[fileObject1 scoreString]];
+        
+        if ([fileObject1 sourceString]) {
+             [cell.sizeValueLabel setText:[fileObject1 sourceString]];
+        }
+        
         if ([fileObject1 finalScoreString]) {
             [cell.countLabel setText:[fileObject1 finalScoreString]];
         }
@@ -257,7 +263,8 @@
 	//[cell.titleTextField sizeToFit];
 	
 	[cell.createdValueLabel setText:[fileObject1 descString]];
-	[cell.sizeValueLabel setText:[fileObject1 sizeString]];
+	
+    //[cell.sizeValueLabel setText:[fileObject1 sizeString]];
 	//[cell.changedValueLabel setText:[fileObject1 descString]];
 	
 	[cell setDelegate:(id<KOFileTableViewCellDelegate>)self];
@@ -465,62 +472,6 @@
 - (void)fileTableViewCell:(KOFileTableViewCell *)cell didTapIconAtIndexPath:(NSIndexPath *)indexPath {
 	[self iconButtonAction:cell indexPath:indexPath];
 }
-
-//#pragma mark UITableViewDelegate Methods
-//
-//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return 1;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return  [_scoreClips count];
-//}
-//
-//// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-//// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *kCustomCellID = @"MyCellID";
-//    
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCustomCellID];
-//    if (cell == nil)
-//    {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCustomCellID];
-//        // cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//        //cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        
-//    }
-//    
-//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//    
-//    cell.textLabel.numberOfLines = 1;
-//    
-//    NSMutableDictionary *clipInfo = [_scoreClips objectAtIndex:indexPath.row];
-//    
-//    clipInfo = [SupportFunction normalizeDictionary:clipInfo];
-//    
-//    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@",[clipInfo objectForKey:@"team1"],[clipInfo objectForKey:@"team2"]];
-//    cell.textLabel.textColor = [UIColor blackColor];
-//        
-//    //cell.textLabel.textAlignment = UITextAlignmentLeft;
-//    cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
-//    cell.backgroundColor = [UIColor colorWithRed:0.3 green:0.9 blue:0.1 alpha:0.5];
-//    
-//    return cell;
-//}
-//
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    NSLog(@"did select = %d", indexPath.row);
-//    //[[AppViewController Shared] changeToVideoClip:nil];
-//    IntroVideoViewController *temVC = [[IntroVideoViewController alloc] initWithNibName:@"IntroVideoViewController" bundle:nil];
-//    [self presentViewController:temVC animated:YES completion:nil];
-//
-//}
-
 
 #pragma mark - APIRequesterProtocol
 

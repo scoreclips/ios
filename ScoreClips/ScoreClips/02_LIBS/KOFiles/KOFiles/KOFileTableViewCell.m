@@ -49,8 +49,9 @@
 
 #define KOFONT_FILES_TITLE [UIFont fontWithName:@"HelveticaNeue" size:18.0f]
 #define KOFONT_FILES_COUNTER [UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0f]
-#define KOFONT_FILES_SUBTITLE [UIFont fontWithName:@"HelveticaNeue-Bold" size:13.0f]
+#define KOFONT_FILES_SUBTITLE [UIFont fontWithName:@"HelveticaNeue-Bold" size:11.0f]
 #define KOFONT_FILES_SUBTITLE_VALUE [UIFont fontWithName:@"HelveticaNeue" size:15.0f]
+#define KOFONT_FILES_SUBTITLE_SOURCE_VALUE [UIFont fontWithName:@"HelveticaNeue" size:11.0f]
 
 @implementation KOFileTableViewCell
 
@@ -125,8 +126,8 @@
 		[createdValueLabel setBackgroundColor:[UIColor clearColor]];
 		[self.contentView addSubview:createdValueLabel];
 		
-		sizeLabel = [[UILabel alloc] initWithFrame:CGRectMake(254, 50, 32, 18)];
-		[sizeLabel setText:@"Size:"];
+		sizeLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 58, 45, 30)];
+		[sizeLabel setText:@"Source:"];
 		[sizeLabel setFont:KOFONT_FILES_SUBTITLE];
 		[sizeLabel setTextColor:KOCOLOR_FILES_SUBTITLE];
 		[sizeLabel setShadowColor:KOCOLOR_FILES_SUBTITLE_SHADOW];
@@ -134,13 +135,13 @@
 		[sizeLabel setBackgroundColor:[UIColor clearColor]];
 		[self.contentView addSubview:sizeLabel];
 		
-		sizeValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(298, 50, 44, 18)];
-		[sizeValueLabel setFont:KOFONT_FILES_SUBTITLE_VALUE];
+		sizeValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(265, 58, 100, 30)];
+		[sizeValueLabel setFont:KOFONT_FILES_SUBTITLE_SOURCE_VALUE];
 		[sizeValueLabel setTextColor:KOCOLOR_FILES_SUBTITLE_VALUE];
 		[sizeValueLabel setShadowColor:KOCOLOR_FILES_SUBTITLE_VALUE_SHADOW];
 		[sizeValueLabel setShadowOffset:CGSizeMake(0, 1)];
 		[sizeValueLabel setBackgroundColor:[UIColor clearColor]];
-        [sizeValueLabel setTextAlignment:UITextAlignmentRight];
+        [sizeValueLabel setTextAlignment:UITextAlignmentLeft];
 		[self.contentView addSubview:sizeValueLabel];
 		
 		changedLabel = [[UILabel alloc] initWithFrame:CGRectMake(370, 50, 91, 18)];

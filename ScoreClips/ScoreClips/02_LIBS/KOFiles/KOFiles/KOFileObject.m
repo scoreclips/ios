@@ -48,7 +48,7 @@
 @synthesize ancestorFileObjects;
 @synthesize submersionLevel;
 
-@synthesize scoreString, finalScoreString, descString, sourceUrl;
+@synthesize scoreString, finalScoreString, descString, sourceUrl, sourceString;
 
 - (BOOL)isDirectory {
 	return directory;

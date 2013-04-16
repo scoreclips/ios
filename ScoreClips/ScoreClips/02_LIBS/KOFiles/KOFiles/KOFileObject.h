@@ -50,7 +50,7 @@
 
 
 // TrongV
-@property (nonatomic, strong) NSString *scoreString, *finalScoreString, *descString, *sourceUrl;
+@property (nonatomic, strong) NSString *scoreString, *finalScoreString, *descString, *sourceUrl, *sourceString;
 
 - (BOOL)isDirectory;
 - (BOOL)isEqualToFileObject:(KOFileObject *)fileObject;
