@@ -145,6 +145,9 @@
 		AA6792F5171845AC00418F89 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AA6792BD171845AC00418F89 /* README.md */; };
 		AA6792FD1718A2FF00418F89 /* V8HorizontalPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6792FB1718A2FF00418F89 /* V8HorizontalPickerView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AA6792FF1718A35D00418F89 /* gift-bg-price.png in Resources */ = {isa = PBXBuildFile; fileRef = AA6792FE1718A35C00418F89 /* gift-bg-price.png */; };
+		AA85BCFD171E39BE00E9E9D9 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AA85BCFA171E39BE00E9E9D9 /* iRate.bundle */; };
+		AA85BCFE171E39BE00E9E9D9 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA85BCFC171E39BE00E9E9D9 /* iRate.m */; };
+		AA85BD01171E3A8100E9E9D9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA85BD00171E3A8000E9E9D9 /* StoreKit.framework */; };
 		AA882FF317196AD800CBD58C /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = AA882FEC17196AD800CBD58C /* Icon-72.png */; };
 		AA882FF417196AD800CBD58C /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = AA882FED17196AD800CBD58C /* Icon-Small-50.png */; };
 		AA882FF517196AD800CBD58C /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = AA882FEE17196AD800CBD58C /* Icon-Small.png */; };
@@ -169,7 +172,7 @@
 		AA118CC7171B229F004DC9ED /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		AA118CC8171B229F004DC9ED /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		AA118CCB171B254B004DC9ED /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
-		AA23A0BD1716E9E800E202BB /* ScoreClips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreClips.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA23A0BD1716E9E800E202BB /* scoreclips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scoreclips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA23A0C01716E9E800E202BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AA23A0C21716E9E800E202BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AA23A0C41716E9E800E202BB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -384,6 +387,10 @@
 		AA6792FB1718A2FF00418F89 /* V8HorizontalPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = V8HorizontalPickerView.m; sourceTree = "<group>"; };
 		AA6792FC1718A2FF00418F89 /* V8HorizontalPickerViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = V8HorizontalPickerViewProtocol.h; sourceTree = "<group>"; };
 		AA6792FE1718A35C00418F89 /* gift-bg-price.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gift-bg-price.png"; sourceTree = "<group>"; };
+		AA85BCFA171E39BE00E9E9D9 /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
+		AA85BCFB171E39BE00E9E9D9 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
+		AA85BCFC171E39BE00E9E9D9 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
+		AA85BD00171E3A8000E9E9D9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		AA882FEC17196AD800CBD58C /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		AA882FED17196AD800CBD58C /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		AA882FEE17196AD800CBD58C /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
@@ -399,6 +406,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA85BD01171E3A8100E9E9D9 /* StoreKit.framework in Frameworks */,
 				AA6791E91717B7C100418F89 /* MediaPlayer.framework in Frameworks */,
 				AA23A1F41716F13300E202BB /* MobileCoreServices.framework in Frameworks */,
 				AA23A1F01716F0F000E202BB /* CoreText.framework in Frameworks */,
@@ -428,7 +436,7 @@
 		AA23A0BE1716E9E800E202BB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AA23A0BD1716E9E800E202BB /* ScoreClips.app */,
+				AA23A0BD1716E9E800E202BB /* scoreclips.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -436,6 +444,7 @@
 		AA23A0BF1716E9E800E202BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA85BD00171E3A8000E9E9D9 /* StoreKit.framework */,
 				AA6791E81717B7C100418F89 /* MediaPlayer.framework */,
 				AA23A1F31716F13300E202BB /* MobileCoreServices.framework */,
 				AA23A1EF1716F0F000E202BB /* CoreText.framework */,
@@ -529,6 +538,7 @@
 		AA23A1001716EE0900E202BB /* 02_LIBS */ = {
 			isa = PBXGroup;
 			children = (
+				AA85BCF9171E39BE00E9E9D9 /* iRate */,
 				AA6792F91718A2FE00418F89 /* V8HorizontalPickerView */,
 				AA679277171845AB00418F89 /* KOFiles */,
 				AA23A1011716EE0900E202BB /* ASIHTTP */,
@@ -826,6 +836,16 @@
 			path = V8HorizontalPickerView;
 			sourceTree = "<group>";
 		};
+		AA85BCF9171E39BE00E9E9D9 /* iRate */ = {
+			isa = PBXGroup;
+			children = (
+				AA85BCFA171E39BE00E9E9D9 /* iRate.bundle */,
+				AA85BCFB171E39BE00E9E9D9 /* iRate.h */,
+				AA85BCFC171E39BE00E9E9D9 /* iRate.m */,
+			);
+			path = iRate;
+			sourceTree = "<group>";
+		};
 		AA882FEB17196AD800CBD58C /* 03_APP_ICONS */ = {
 			isa = PBXGroup;
 			children = (
@@ -857,7 +877,7 @@
 			);
 			name = ScoreClips;
 			productName = ScoreClips;
-			productReference = AA23A0BD1716E9E800E202BB /* ScoreClips.app */;
+			productReference = AA23A0BD1716E9E800E202BB /* scoreclips.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -980,6 +1000,7 @@
 				AA882FF917196AD800CBD58C /* iTunesArtwork.png in Resources */,
 				AA882FFD1719952500CBD58C /* title_bar_bg.png in Resources */,
 				AA118CCC171B254B004DC9ED /* WebViewController.xib in Resources */,
+				AA85BCFD171E39BE00E9E9D9 /* iRate.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1053,6 +1074,7 @@
 				AA6792F1171845AC00418F89 /* KOSegmentedControl.m in Sources */,
 				AA6792FD1718A2FF00418F89 /* V8HorizontalPickerView.m in Sources */,
 				AA118CC9171B229F004DC9ED /* WebViewController.m in Sources */,
+				AA85BCFE171E39BE00E9E9D9 /* iRate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1146,11 +1168,13 @@
 		AA23A0E11716E9E800E202BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScoreClips/ScoreClips-Prefix.pch";
 				INFOPLIST_FILE = "ScoreClips/ScoreClips-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = scoreclips;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1158,11 +1182,15 @@
 		AA23A0E21716E9E800E202BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScoreClips/ScoreClips-Prefix.pch";
 				INFOPLIST_FILE = "ScoreClips/ScoreClips-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = scoreclips;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
