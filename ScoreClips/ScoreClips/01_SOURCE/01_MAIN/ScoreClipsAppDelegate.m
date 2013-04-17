@@ -8,6 +8,7 @@
 
 #import "ScoreClipsAppDelegate.h"
 #import "Define.h"
+#import "iRate.h"
 
 @implementation ScoreClipsAppDelegate
 
@@ -18,6 +19,17 @@
     // Which screen want to support other Orientation just set STRING_USER_DEFAULT_ORIENTATION
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:UIInterfaceOrientationMaskPortrait]
                                               forKey:STRING_USER_DEFAULT_ORIENTATION];
+    
+    
+    //[iRate sharedInstance].applicationBundleID = @"com.aigo.scoreclips";
+    //[iRate sharedInstance].applicationBundleID = @"com.visikard.pro.r1";
+	[iRate sharedInstance].onlyPromptIfLatestVersion = NO;
+    
+    //enable preview mode
+    //[iRate sharedInstance].previewMode = YES;
+    
+    [iRate sharedInstance].usesUntilPrompt = 15;
+    [iRate sharedInstance].daysUntilPrompt = 5;
     
     return YES;
 }
