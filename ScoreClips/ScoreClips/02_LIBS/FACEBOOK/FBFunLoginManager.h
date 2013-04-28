@@ -13,11 +13,13 @@
 
 //#define STRING_FACEBOOK_APP_ID                              @"342694312412758" // Free
 //#define STRING_FACEBOOK_APP_ID                              @"210849718975311" // Hackbook
-#define STRING_FACEBOOK_APP_ID                              @"416904738361278"
+//#define STRING_FACEBOOK_APP_ID                              @"416904738361278" // VK
+#define STRING_FACEBOOK_APP_ID                              @"438687702889701" // aigo
+
 
 #define ARRAY_FACEBOOK_APP_PERMISSION                       [[NSArray alloc] initWithObjects:@"publish_stream", @"read_stream", @"friends_likes", nil]
 //#define STRING_FACEBOOK_APP_PERMISSION                      @"read_stream,publish_stream,friends_likes,user_photos,friends_photos"
-#define STRING_FACEBOOK_APP_PERMISSION                      @"read_stream,publish_stream,user_photos,email,user_birthday"
+#define STRING_FACEBOOK_APP_PERMISSION                      @"read_stream,publish_stream,user_photos,email,user_birthday,user_location,user_education_history,user_work_history,user_about_me,user_relationships"
 #define STRING_FACEBOOK_MESSAGE_CONNECTION_ERROR            @"Network Error. Please check the reception and the connection settings."
 #define STRING_CODER_FB_USER_ID								@"STRING_CODER_FB_USER_ID"
 #define STRING_CODER_FB_NAME								@"STRING_CODER_FB_NAME"
@@ -65,6 +67,12 @@ typedef enum
 @property (nonatomic, retain) NSString *about;
 @property (nonatomic, strong) NSDate   *birthday;
 @property (nonatomic, strong) NSDate   *updateTime;
+@property (nonatomic, retain) NSString *initiatedFrom;
+@property (nonatomic, retain) NSString *location;
+@property (nonatomic, retain) NSArray *education;
+@property (nonatomic, retain) NSArray *work;
+@property (nonatomic, retain) NSString *relationshipStatus;
+@property (nonatomic, retain) NSString *coverURL;
 
 @property (nonatomic) BOOL loginStatus;
 
@@ -74,6 +82,8 @@ typedef enum
 - (void)update;
 - (void)save;
 
-- (UIViewController *)getFBControllerWithDelegate:(id)idDelegate;
+- (UIViewController *)getFBControllerWithDelegate:(id)idDelegate
+                                    InitiatedFrom:(NSString*)fromWhere;
 + (FBFunLoginManager *)Shared;
+- (void)dismissPresentedViewController;
 @end

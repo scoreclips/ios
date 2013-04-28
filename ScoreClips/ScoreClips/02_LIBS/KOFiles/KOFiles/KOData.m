@@ -150,7 +150,7 @@
 	//return [NSArray arrayWithObjects:viewObject, copyObject, moveObject, renameObject, deleteObject, exportObject, nil];
     
     
-	return [NSArray arrayWithObjects:viewObject, copyObject, nil];
+	return [NSArray arrayWithObjects:viewObject, copyObject, exportObject, nil];
 }
 
 

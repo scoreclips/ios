@@ -9,9 +9,10 @@
 #import "FBFunLoginManager.h"
 #import "APIRequester.h"
 #import "JSON.h"
+#import "AppViewController.h"
 
 @implementation FBFunLoginManager
-@synthesize name, email, fName, lName, userID, loginStatus, pictureURL, accessToken, about, gender, birthday, updateTime;
+@synthesize name, email, fName, lName, userID, loginStatus, pictureURL, accessToken, about, gender, birthday, updateTime,initiatedFrom;
 
 - (id)initWithAppId:(NSString *)appId andPermission:(NSString *)permission
 {
@@ -27,9 +28,9 @@
     return self;
 }
 
-- (UIViewController *)getFBControllerWithDelegate:(id)idDelegate {
+- (UIViewController *)getFBControllerWithDelegate:(id)idDelegate InitiatedFrom:(NSString*)fromWhere {
     m_Delegate = idDelegate;
-    
+    initiatedFrom = fromWhere;
     if (_FBLoginDialogVC) {
         return _FBLoginDialogVC;
     }
@@ -43,7 +44,8 @@
         [m_Delegate changeBackFromFBFunLoginManager];
     }
     
-    [_FBLoginDialogVC isLoadingView:NO];
+    //[_FBLoginDialogVC isLoadingView:NO];
+    [_FBLoginDialogVC dismissModalViewControllerAnimated:YES];
 }
 
 - (void)logout
@@ -72,21 +74,26 @@
     m_FBFunLoginManagerStep = ENUM_FB_FUN_LOGIN_MANAGER_STEP_START;
 }
 
+- (void)dismissPresentedViewController {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (void)changeBackToPreviousViewController {
-//    [self dismissModalViewControllerAnimated:YES];
+    //    [self dismissModalViewControllerAnimated:YES];
     
+    [[AppViewController Shared] chageBackFromFacebookViewController];
 }
 
 - (void)update {
     switch (m_FBFunLoginManagerStep) {
         case ENUM_FB_FUN_LOGIN_MANAGER_STEP_LOGIN_CANCEL:
-
+            
             break;
         case ENUM_FB_FUN_LOGIN_MANAGER_STEP_LOGIN_FINISH:
-
+            
             break;
         case ENUM_FB_FUN_LOGIN_MANAGER_STEP_LOGIN_FAIL:
-
+            
             break;
         default:
             break;
@@ -118,7 +125,7 @@ static FBFunLoginManager *m_Instance;
     if ( !m_Instance ) {
 		m_Instance = [[FBFunLoginManager alloc] initWithAppId:STRING_FACEBOOK_APP_ID andPermission:STRING_FACEBOOK_APP_PERMISSION];
 		
-       NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:STRING_USER_DEFAULT_FACEBOOK_DATA_MANAGER];
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:STRING_USER_DEFAULT_FACEBOOK_DATA_MANAGER];
         if ([NSKeyedUnarchiver unarchiveObjectWithData:data]) {
             FBFunLoginManager *_data = [[NSKeyedUnarchiver unarchiveObjectWithData:data] retain];
 			m_Instance.userID = _data.userID;
@@ -133,6 +140,12 @@ static FBFunLoginManager *m_Instance;
             m_Instance.about = _data.about;
             m_Instance.birthday = _data.birthday;
             m_Instance.updateTime = _data.updateTime;
+            m_Instance.location = _data.location;
+            m_Instance.education = _data.education;
+            m_Instance.work = _data.work;
+            m_Instance.relationshipStatus = _data.relationshipStatus;
+            m_Instance.coverURL = _data.coverURL;
+            m_Instance.initiatedFrom = _data.initiatedFrom;
 			[_data release];
         }
     }
@@ -192,11 +205,11 @@ static FBFunLoginManager *m_Instance;
 }
 - (void)requestFinished:(ASIHTTPRequest *)request andType:(ENUM_API_REQUEST_TYPE)type
 {
+    NSString *responseString = [request responseString];
+    NSLog(@"getMyFacebookProfileFinished: %@",responseString);
+    
+    NSMutableDictionary *responseJSON = [responseString JSONValue];
     if (type == ENUM_API_REQUEST_TYPE_FB_GET_PROFILE) {
-        NSString *responseString = [request responseString];
-        NSLog(@"getMyFacebookProfileFinished: %@",responseString);
-        
-        NSMutableDictionary *responseJSON = [responseString JSONValue];
         if (responseJSON) {
 			self.userID = [responseJSON objectForKey:STRING_RESPONSE_KEY_FB_ID];
             self.name = [responseJSON objectForKey:STRING_RESPONSE_KEY_FB_NAME];
@@ -231,24 +244,54 @@ static FBFunLoginManager *m_Instance;
             else
                 self.updateTime = nil;
             
-			if (userID && name) {
-				self.loginStatus = YES;
-				[self save];
-                [self changeBackToPreviousViewController];
-                m_FBFunLoginManagerStep = ENUM_FB_FUN_LOGIN_MANAGER_STEP_LOGIN_FINISH;
-			}
-            else {
-                NSLog(@"userID || name = nil");
-                self.loginStatus = NO;
-                [self save];
-                [m_AlertFBLoginFail show];
-                m_FBFunLoginManagerStep = ENUM_FB_FUN_LOGIN_MANAGER_STEP_LOGIN_FAIL;
+            // home town
+            NSDictionary *tempDic = [responseJSON objectForKey:STRING_RESPONSE_KEY_FB_HOMETOWN];
+            if(tempDic)
+            {
+                self.initiatedFrom = [tempDic objectForKey:@"name"];
             }
+            else
+                self.initiatedFrom = @"";
+            // location
+            tempDic = [responseJSON objectForKey:STRING_RESPONSE_KEY_FB_LOCATION];
+            if(tempDic)
+            {
+                self.location = [tempDic objectForKey:@"name"];
+            }
+            else
+                self.location = @"";
+            // education
+            self.education = [NSArray arrayWithArray:[responseJSON objectForKey:STRING_RESPONSE_KEY_FB_EDUCATION]];
+            self.work = [NSArray arrayWithArray:[responseJSON objectForKey:STRING_RESPONSE_KEY_FB_WORK]];
+            tempStr = [responseJSON objectForKey:STRING_RESPONSE_KEY_FB_RELATIONSHIPSTATUS];
+            self.relationshipStatus = tempStr != nil ? tempStr : @"";
+            self.coverURL = @"";
+            
+			[self getUserProfilePicture:self.userID];
         }
         else{
             NSLog(@"responseJSON = nil || empty");
             self.loginStatus = NO;
 			[self save];
+            [m_AlertFBLoginFail show];
+            m_FBFunLoginManagerStep = ENUM_FB_FUN_LOGIN_MANAGER_STEP_LOGIN_FAIL;
+        }
+    }
+    else if (type == ENUM_API_REQUEST_TYPE_FB_GET_PROFILE_PICTURE)
+    {
+        self.pictureURL = [request.url absoluteString];
+        
+        if (userID && name) {
+            self.loginStatus = YES;
+            [self save];
+            [self changeBackToPreviousViewController];
+            [self dismissPresentedViewController];
+            m_FBFunLoginManagerStep = ENUM_FB_FUN_LOGIN_MANAGER_STEP_LOGIN_FINISH;
+        }
+        else {
+            NSLog(@"userID || name = nil");
+            self.loginStatus = NO;
+            [self save];
             [m_AlertFBLoginFail show];
             m_FBFunLoginManagerStep = ENUM_FB_FUN_LOGIN_MANAGER_STEP_LOGIN_FAIL;
         }
@@ -263,18 +306,26 @@ static FBFunLoginManager *m_Instance;
 	[self save];
     
     [_FBLoginDialogVC isLoadingView:YES];
-  
+    
     NSString *strURLString = [NSString stringWithFormat:@"https://graph.facebook.com/me?access_token=%@", accessToken];
+    
     [_APIRequester requestWithType:ENUM_API_REQUEST_TYPE_FB_GET_PROFILE andURL:strURLString andDelegate:self];
     
-//    NSString *strURL = @"https://graph.facebook.com/me?";
-//    NSMutableDictionary *dicPost = [NSMutableDictionary new];
-//    
-//    [dicPost setValue:@"name,id,picture" forKey:@"fields"];
-//    [dicPost setValue:USER_DEFAULT_FB_ACCESSTOKEN forKey:@"access_token"];
-//    
-//    [[APIRequester Shared] requestWithType:ENUM_API_REQUEST_TYPE_FB_GET_PROFILE andStringURL:strURL andDictionaryPost:dicPost andDelegate:self];
+    //    NSString *strURL = @"https://graph.facebook.com/me?";
+    //    NSMutableDictionary *dicPost = [NSMutableDictionary new];
+    //
+    //    [dicPost setValue:@"name,id,picture" forKey:@"fields"];
+    //    [dicPost setValue:USER_DEFAULT_FB_ACCESSTOKEN forKey:@"access_token"];
+    //
+    //    [[APIRequester Shared] requestWithType:ENUM_API_REQUEST_TYPE_FB_GET_PROFILE andStringURL:strURL andDictionaryPost:dicPost andDelegate:self];
 }
+
+-(void)getUserProfilePicture:(NSString*)userIDStr
+{
+    NSString *url = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", userIDStr];
+    [_APIRequester requestWithType:ENUM_API_REQUEST_TYPE_FB_GET_PROFILE_PICTURE andURL:url andDelegate:self];
+}
+
 - (void)displayRequired
 {
     if (m_FBFunLoginManagerStep == ENUM_FB_FUN_LOGIN_MANAGER_STEP_DISPLAYED) {

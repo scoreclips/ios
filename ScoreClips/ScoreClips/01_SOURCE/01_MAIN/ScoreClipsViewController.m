@@ -18,13 +18,18 @@
 #import "KOMenuObject.h"
 #import "KOSegmentedControl.h"
 #import "WebViewController.h"
+#import "FBFunLoginDialog.h"
+#import "FBFunLoginManager.h"
+#import "AlbumAddObjectViewController.h"
 
-@interface ScoreClipsViewController () {
+@interface ScoreClipsViewController () <FBFunLoginDialogDelegate,AlbumAddObjectViewControllerDelegate> {
     V8HorizontalPickerView                  *pickerView;
     APIRequester                            *_APIRequester;
     NSMutableDictionary                     *_scoreJsons;
     NSMutableArray                          *_scoreDates;
     int                                     _scoreIndex;
+    FBFunLoginDialog                        *_FBLoginDialogVC;
+    NSString                                *facebookAccessToken;
 }
 
 @end
@@ -460,10 +465,34 @@
         [self presentViewController:temVC animated:YES completion:nil];
     } 
 
-    if (i == 1 && self.fileObject.sourceUrl) {
+    else if (i == 1 && self.fileObject.sourceUrl) {
         WebViewController *temVC = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:[NSBundle mainBundle]];
         temVC.urlString = self.fileObject.sourceUrl;
         [self presentViewController:temVC animated:YES completion:nil];
+    } else if (i == 2)  {
+        
+//        if (!_FBLoginDialogVC) {
+//            _FBLoginDialogVC = [[FBFunLoginDialog alloc] initWithAppId:STRING_FACEBOOK_APP_ID requestedPermissions:STRING_FACEBOOK_APP_PERMISSION delegate:self];
+//            //[_FBLoginDialogVC isLoadingView:YES];
+//        }
+//        
+//        [_FBLoginDialogVC login];
+//        [self presentViewController:_FBLoginDialogVC animated:YES completion:nil];
+        
+        
+        AlbumAddObjectViewController *controller = [[AlbumAddObjectViewController alloc] initWithNibName:@"AlbumAddObjectViewController" bundle:[NSBundle mainBundle]];
+        controller.delegate = self;
+        controller.postingType = enumPostingType_Status;
+        //controller.mediaData = _photoData;
+        //controller.kardID = [_kardsNodeData.kardsID integerValue];
+        //controller.albumID = self.albumIdFromParent;
+        NSString *caption = [NSString stringWithFormat:@"%@: %@ \n%@",self.fileObject.base,self.fileObject.descString,self.fileObject.sourceUrl];
+        
+        controller.strCaption = caption;
+        [self presentViewController:controller animated:YES completion:nil];
+        controller.lbTitle.text = @"Bửi bình luận";
+        
+        //[[AppViewController Shared] changeToFacebookViewController];
     }
 
 }
@@ -590,4 +619,52 @@
     }
 }
 
+#pragma mark FBFunLoginDialogDelegate
+
+- (void)accessTokenFound:(NSString *)apiKey {
+    [_FBLoginDialogVC dismissModalViewControllerAnimated:YES];
+    
+    //ALERT(@"Facebook", @"Status posted successfully.");
+    
+    facebookAccessToken = apiKey;
+    
+    // save token to share
+    [FBFunLoginManager Shared].loginStatus = YES;
+    [FBFunLoginManager Shared].accessToken = apiKey;
+    //VKLog(@"_vd_facebookAccessToken:%@", self.facebookAccessToken);
+    
+    //self.isFacebook = YES;
+    //facebookBtnBgImg.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"upload_facebook_active" ofType:@"png"]];
+}
+
+- (void)displayRequired {
+    
+}
+
+- (void)loginFail {
+    
+}
+
+- (void)clickBack {
+    [_FBLoginDialogVC dismissModalViewControllerAnimated:YES];
+    
+    //self.isFacebook = NO;
+    //facebookBtnBgImg.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"upload_facebook_default" ofType:@"png"]];
+}
+
+#pragma mark - AlbumAddObjectViewControllerDelegate
+
+- (void)donePostingCallBackWithData:(NSDictionary *)data
+{
+    if (data) {//posted status data
+        NSLog(@"posted data info:%@",data.description);
+        //[self requestDateWithType:ENUM_API_REQUEST_TYPE_ALBUM_GET_INFO];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)cancelPostingCallBack
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

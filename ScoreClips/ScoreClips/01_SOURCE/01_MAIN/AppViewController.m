@@ -7,6 +7,8 @@
 //
 
 #import "AppViewController.h"
+#import "FBFunLoginManager.h"
+#import "Define.h"
 
 @interface AppViewController ()
 
@@ -123,6 +125,75 @@ static AppViewController *_appVCInstance;
 {
     [_listOfViewController removeLastObject];
     [self.navigationController dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - Facebook & Twitter
+- (void)changeToFacebookViewController {
+    [[FBFunLoginManager Shared] reLogin];
+    
+    [_listOfViewController addObject:[[FBFunLoginManager Shared] getFBControllerWithDelegate:self InitiatedFrom:@""]];
+    [self presentViewController:[[FBFunLoginManager Shared] getFBControllerWithDelegate:self InitiatedFrom:@""] animated:YES completion:nil];
+}
+
+- (void)chageBackFromFacebookViewController {
+    
+    if ([FBFunLoginManager Shared].loginStatus) {
+        
+        if ([[FBFunLoginManager Shared].initiatedFrom isEqualToString:STRING_COMPARED_ALBUM_ADD_OBJECTS_VIEW_CONTROLLER]) {
+            [[FBFunLoginManager Shared] dismissPresentedViewController];
+            [[NSNotificationCenter defaultCenter] postNotificationName:STRING_LOGIN_ON_FB object:nil];
+        } else {
+            [_listOfViewController removeLastObject];
+            [self.navigationController popViewControllerAnimated:NO];
+        }
+        
+		if ([FBFunLoginManager Shared].fName == nil || [FBFunLoginManager Shared].lName == nil || [FBFunLoginManager Shared].userID == nil) {
+			ALERT(@"chageBackFromFacebookViewController", STRING_ALERT_DATA_IS_NIL);
+			return;
+		}
+		
+        
+//		NSMutableDictionary  *params = [NSMutableDictionary new];
+//        [params setObject:[FBFunLoginManager Shared].fName forKey:STRING_REQUEST_KEY_F_NAME];
+//		[params setObject:[FBFunLoginManager Shared].lName forKey:STRING_REQUEST_KEY_L_NAME];
+//		[params setObject:[FBFunLoginManager Shared].email forKey:STRING_REQUEST_KEY_EMAIL];
+//        [params setObject:[FBFunLoginManager Shared].gender forKey:STRING_REQUEST_KEY_GENDER];
+//        [params setObject:[FBFunLoginManager Shared].about forKey:STRING_REQUEST_KEY_ABOUT];
+//        [params setObject:[FBFunLoginManager Shared].pictureURL forKey:STRING_REQUEST_KEY_PROFILE_PICTURE];
+//        [params setObject:[FBFunLoginManager Shared].location forKey:STRING_RESPONSE_KEY_FB_LOCATION];
+//        [params setObject:[FBFunLoginManager Shared].education forKey:STRING_RESPONSE_KEY_FB_EDUCATION];
+//        [params setObject:[FBFunLoginManager Shared].work forKey:STRING_RESPONSE_KEY_FB_WORK];
+//        [params setObject:[FBFunLoginManager Shared].relationshipStatus forKey:STRING_RESPONSE_KEY_FB_RELATIONSHIPSTATUS];
+//        [params setObject:[FBFunLoginManager Shared].birthday forKey:STRING_RESPONSE_KEY_FB_BIRTHDAY];
+//        if([FBFunLoginManager Shared].birthday)
+//        {
+//            NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
+//                                               components:NSYearCalendarUnit
+//                                               fromDate:[FBFunLoginManager Shared].birthday
+//                                               toDate:[FBFunLoginManager Shared].updateTime
+//                                               options:0];
+//            NSInteger age = [ageComponents year];
+//            // set age
+//            [params setObject:[NSNumber numberWithInt:age] forKey:STRING_REQUEST_KEY_AGE];
+//        }
+//        else
+//        {
+//            [params setObject:[NSNumber numberWithInt:-1] forKey:STRING_REQUEST_KEY_AGE];
+//        }
+//        
+//        SplashScreen_v2x0_ViewController *registryViewController = (SplashScreen_v2x0_ViewController*)[_listOfViewController lastObject];
+//        [registryViewController updateInfoFromFacebook:params];
+        
+    }
+    else {
+        if ([[FBFunLoginManager Shared].initiatedFrom isEqualToString:STRING_COMPARED_ALBUM_ADD_OBJECTS_VIEW_CONTROLLER]) {
+            [[FBFunLoginManager Shared] dismissPresentedViewController];
+        } else {
+            [_listOfViewController removeLastObject];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    }
 }
 
 

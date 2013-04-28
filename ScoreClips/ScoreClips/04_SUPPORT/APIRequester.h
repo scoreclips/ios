@@ -35,9 +35,16 @@
 #define STRING_RESPONSE_KEY_FB_L_NAME									@"last_name"
 #define	STRING_RESPONSE_KEY_FB_EMAIL									@"email"
 #define	STRING_RESPONSE_KEY_FB_GENDER									@"gender"
-#define	STRING_RESPONSE_KEY_FB_ABOUT									@"about"
+#define	STRING_RESPONSE_KEY_FB_ABOUT									@"bio"
 #define	STRING_RESPONSE_KEY_FB_BIRTHDAY									@"birthday"
 #define	STRING_RESPONSE_KEY_FB_UPDATETIME								@"updated_time"
+#define	STRING_RESPONSE_KEY_FB_HOMETOWN                                 @"hometown"
+#define	STRING_RESPONSE_KEY_FB_LOCATION                                 @"location"
+#define	STRING_RESPONSE_KEY_FB_WORK                                     @"work"
+#define	STRING_RESPONSE_KEY_FB_EDUCATION                                @"education"
+#define	STRING_RESPONSE_KEY_FB_RELATIONSHIPSTATUS                       @"relationship_status"
+#define	STRING_RESPONSE_KEY_FB_EMPLOYER                                 @"employer"
+#define	STRING_RESPONSE_KEY_FB_POSITION                                 @"position"
 
 // TW
 #define STRING_RESPONSE_KEY_TW_NAME                                     @"name"

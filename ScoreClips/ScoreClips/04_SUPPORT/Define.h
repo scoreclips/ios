@@ -6,6 +6,30 @@
 
 #import "SupportFunction.h"
 
+//https://bitly.com/a/your_api_key
+#define BITLY_USERNAME "aigogroup"
+#define BITLY_API_KEY   "R_d0a7a46663ae22d76c35c4546bc7f049"
+
+// 0: disable, 1: enable
+#define _USING_HTTPS_PROTOCOL_ 1
+
+// debug flag
+#ifdef __RELEASE__PRODUCTION1__R3__
+#define VKDEBUG 0
+#elif __DEBUG__PRODUCTION1__R3__
+#define VKDEBUG 0
+#else
+#define VKDEBUG 1
+#endif
+
+#if VKDEBUG
+#define VKLog(fmt, ...) VKLoga((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#define VKLog(fmt, ...) VKLoga(fmt, ##__VA_ARGS__);
+#endif
+
+void VKLoga(NSString *format,...);
+
 #define TIMER_DISPLAY_TITLE_SCREEN                                          3.5
 #define TIMER_MAIN_LOOP                                                     0.5
 #define TIMER_COUNT_DOWN_UNIT                                               1
@@ -264,6 +288,9 @@
 #define STRING_COMPARED_KARDS_NODE_DATA                                     @"KardsNodeData"
 #define STRING_COMPARED_KARDS_CATEGORY_DATA                                 @"KardsCategoryData"
 
+#define STRING_LOGIN_ON_FB                                                  @"loginOnFB"
+#define STRING_LOGIN_ON_TWITTER                                             @"loginOnTW"
+
 //#define STRING_IMG_DECK_DUMMY                                               @"bg_kard_grid_9_deck.png"
 #define STRING_IMG_DECK_DUMMY                                               @"bg_deck_dummy.png"
 #define STRING_IMG_KARD_DUMMY                                               @"bg_kard_thumb.png"
@@ -301,6 +328,8 @@
 #define STRING_KONNECT_TITLE                                    @"Konnect"
 #define STRING_PROFILE_MANAGER_TITLE                            @"Profile Manager"
 #define STRING_MY_DEALS_TITLE                                   @"My Deals"
+
+#define STRING_COMPARED_ALBUM_ADD_OBJECTS_VIEW_CONTROLLER       @"STRING_COMPARED_ALBUM_ADD_OBJECTS_VIEW_CONTROLLER"
 
 #define STRING_MSS_KARD_BUILDER_TIP                                         @"Click here to \nbuild a Kard"
 
@@ -378,6 +407,7 @@ typedef enum
     ENUM_API_REQUEST_TYPE_INVALID,
     
     ENUM_API_REQUEST_TYPE_FB_GET_PROFILE,
+    ENUM_API_REQUEST_TYPE_FB_GET_PROFILE_PICTURE,
     
     ENUM_API_REQUEST_TYPE_NOTIFICATION_UPDATE_DEVICE_TOKEN,
     
@@ -386,6 +416,12 @@ typedef enum
     // CLIENT
     ENUM_API_REQUEST_TYPE_GET_NEAREST_ATM,
     ENUM_API_REQUEST_TYPE_GET_DIRECTION,
+    
+    // POST FB
+    ENUM_API_REQUEST_TYPE_ALBUM_POST_STATUS_ON_FB,
+    
+    // BITLY shortent url
+    ENUM_API_REQUEST_TYPE_GET_SHORTENT_URL_ON_BITLY,
     
     // NUM
     ENUM_API_REQUEST_TYPE_FEEDS_CHECK_TOTAL_NUMBER

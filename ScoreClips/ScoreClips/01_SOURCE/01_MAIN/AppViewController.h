@@ -31,6 +31,8 @@
 
 + (AppViewController *)Shared;
 
+@property BOOL isRequesting;
+
 #pragma mark - Indicator view animation
 - (void)isRequesting:(BOOL)isRe andRequestType:(ENUM_API_REQUEST_TYPE)type andFrame:(CGRect)frame;
 
@@ -48,6 +50,10 @@
 #pragma mark - Video View Controller
 - (void)changeToVideoClip:(NSMutableArray*) clips;
 - (void)changeBackFromVideoClip;
+
+#pragma mark - Facebook & Twitter
+- (void)changeToFacebookViewController;
+- (void)chageBackFromFacebookViewController;
 
 
 #pragma mark - Remote Notification

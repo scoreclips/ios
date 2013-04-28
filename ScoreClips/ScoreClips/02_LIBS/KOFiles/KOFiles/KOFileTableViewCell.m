@@ -127,7 +127,7 @@
 		[self.contentView addSubview:createdValueLabel];
 		
 		sizeLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 58, 45, 30)];
-		[sizeLabel setText:@"Source:"];
+		[sizeLabel setText:@"Nguồn:"];
 		[sizeLabel setFont:KOFONT_FILES_SUBTITLE];
 		[sizeLabel setTextColor:KOCOLOR_FILES_SUBTITLE];
 		[sizeLabel setShadowColor:KOCOLOR_FILES_SUBTITLE_SHADOW];

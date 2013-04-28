@@ -15,6 +15,19 @@
 
 @implementation UIAlertView (Shared)
 
+#pragma mark - Debug log
+void VKLoga(NSString *format,...)
+{
+#if VKDEBUG
+    {
+        va_list args;
+        va_start(args,format);
+        NSLogv(format, args);
+        va_end(args);
+    }
+#endif
+}
+
 static UIAlertView *_Shared_1Button;
 + (UIAlertView *)Shared_1Button {
     if ( !_Shared_1Button ) {

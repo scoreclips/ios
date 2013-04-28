@@ -36,7 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterFullscreen:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willExitFullscreen:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
@@ -86,14 +86,16 @@
 
 -(IBAction)btnBackAct:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-    //[[AppViewController Shared] changeBackFromTutorialViewController];
 }
+
 - (BOOL)shouldAutorotate {
     return YES;
 }
+
 -(NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAllButUpsideDown;
 }
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return YES;
@@ -154,6 +156,10 @@
 
 - (void) playbackStateChanged:(NSNotification*) aNotification {
     
+    MPMoviePlayerController *moviePlayer = aNotification.object;
+    MPMoviePlaybackState playbackState = moviePlayer.playbackState;
+    NSLog(@"playbackStateChanged: %i----%f",playbackState,player.currentPlaybackRate);
+
 //    // Obtain the reason why the movie playback finished
 //    NSNumber *finishReason = [[aNotification userInfo] objectForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey];
 //    
@@ -173,12 +179,6 @@
 }
 
 - (void) willFinishPlayBack:(NSNotification*) aNotification {
-    
-    // Obtain the reason why the movie playback finished
-//    NSNumber *finishReason = [[aNotification userInfo] objectForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey];
-//    
-//    NSLog(@"finishReason: %i----%i",[finishReason intValue],player.playbackState);
-    
     // check current play list to play next clip
     if (_index + 1 < [_URLClips count]) {
         // automatic run the next clip
