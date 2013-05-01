@@ -17,8 +17,8 @@
 @interface ScoreClipsViewController : UIViewController <AppDataManagerDelegate,UITableViewDelegate, UITableViewDataSource, KOFileTableViewCellDelegate,V8HorizontalPickerViewDelegate, V8HorizontalPickerViewDataSource,APIRequesterProtocol>
 
 @property (weak, nonatomic) IBOutlet UIImageView *priceSelectorImg;
+- (IBAction)liveScorePressed:(id)sender;
 
-- (IBAction)todayPressed:(id)sender;
 
 @property (nonatomic, strong) KOFileObject *fileObject;
 @property (nonatomic, strong) NSMutableArray *fileObjects;

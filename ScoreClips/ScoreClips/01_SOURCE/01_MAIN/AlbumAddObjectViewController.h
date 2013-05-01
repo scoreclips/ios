@@ -30,7 +30,7 @@ typedef enum {
 #define kPlaceholderVideo                   @"Add a caption to your video..."
 #define kPlaceholderLocation                @"What's up at"
 //#define kPlaceholderStatus                  @"What are you up to?"
-#define kPlaceholderStatus                  @"bình luận của bạn?"
+#define kPlaceholderStatus                  @"Bình luận của bạn?"
 
 @protocol AlbumAddObjectViewControllerDelegate<NSObject>
 @optional

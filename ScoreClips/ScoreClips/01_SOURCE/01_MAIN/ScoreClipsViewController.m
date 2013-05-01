@@ -41,6 +41,12 @@
 @synthesize shadowViewBottom, shadowViewTop;
 @synthesize fileObject, fileObjects, selectedFileObjects;
 
+- (IBAction)liveScorePressed:(id)sender {
+    WebViewController *temVC = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:[NSBundle mainBundle]];
+    temVC.urlString = @"http://iphone.livescore.com/";
+    [self presentViewController:temVC animated:YES completion:nil];
+}
+
 #pragma mark - View lifecycle
 
 - (ScoreClipsViewController *)initWithFileObject:(KOFileObject *)myDir
@@ -486,11 +492,22 @@
         //controller.mediaData = _photoData;
         //controller.kardID = [_kardsNodeData.kardsID integerValue];
         //controller.albumID = self.albumIdFromParent;
-        NSString *caption = [NSString stringWithFormat:@"%@: %@ \n%@",self.fileObject.base,self.fileObject.descString,self.fileObject.sourceUrl];
+        NSString *score = @"";
+        if ([self.fileObject finalScoreString]) {
+            score = [self.fileObject finalScoreString];
+        }
+		if ([self.fileObject scoreString] && [self.fileObject finalScoreString]) {
+			score = [NSString stringWithFormat:@"%@ - [%@]",[self.fileObject scoreString],[self.fileObject finalScoreString]];
+        }
+        
+        NSString *caption = [NSString stringWithFormat:@"%@: %@\n%@",self.fileObject.base,self.fileObject.descString,self.fileObject.sourceUrl];
+        if (score.length > 0) {
+            caption = [NSString stringWithFormat:@"%@ (%@) : %@\n%@",self.fileObject.base,score,self.fileObject.descString,self.fileObject.sourceUrl];
+        }
         
         controller.strCaption = caption;
         [self presentViewController:controller animated:YES completion:nil];
-        controller.lbTitle.text = @"Bửi bình luận";
+        controller.lbTitle.text = @"Gửi bình luận";
         
         //[[AppViewController Shared] changeToFacebookViewController];
     }
@@ -667,4 +684,5 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end
