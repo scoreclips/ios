@@ -258,7 +258,7 @@
     _menuTagView.userInteractionEnabled = YES;
 
     
-     NSMutableArray *jsonData = [sbJSON objectWithString:[request responseString] error:&error];
+     //NSMutableArray *jsonData = [sbJSON objectWithString:[request responseString] error:&error];
 //    if (type == ENUM_API_REQUEST_TYPE_ALBUM_UPDATE_OBJECT_INFO) {
 //        [[AppViewController Shared] isRequesting:NO andRequestType:type andFrame:CGRectZero];
 //        if (jsonData.count > 0) {

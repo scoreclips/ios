@@ -102,7 +102,7 @@
         //[titleTextField setTextAlignment:NSTextAlignmentJustified];
         // Trongv - move the title over all items
 		//[titleTextField setFrame:CGRectMake(108, 14, titleTextField.frame.size.width, titleTextField.frame.size.height)];
-        [titleTextField setFrame:CGRectMake(30, 5, 280, 20)];
+        [titleTextField setFrame:CGRectMake(30, 5, 280, 26)];
         //[titleTextField setBackgroundColor:[UIColor redColor]];
         //[titleTextField set:titleTextField.frame];
 		[self.contentView addSubview:titleTextField];

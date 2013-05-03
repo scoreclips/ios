@@ -92,7 +92,7 @@ typedef enum {
 
 
 - (IBAction)locationButtonPressed:(id)sender;
-- (IBAction)peopleButtonPressed:(id)sender;
+//- (IBAction)peopleButtonPressed:(id)sender;
 - (IBAction)twitterButtonPressed:(id)sender;
 - (IBAction)facebookButtonPressed:(id)sender;
 - (IBAction)donePostingPressed:(id)sender;

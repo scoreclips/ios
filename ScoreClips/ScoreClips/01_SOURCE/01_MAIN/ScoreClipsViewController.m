@@ -303,6 +303,7 @@
 	KOFileTableViewCell *cell = (KOFileTableViewCell *)[fileTableView cellForRowAtIndexPath:indexPath];
     
 	[self tapOnFileObject:cell.fileObject];
+    [self iconButtonAction:cell indexPath:indexPath];
 }
 
 #pragma mark - Actions
