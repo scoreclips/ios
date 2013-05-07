@@ -11,7 +11,8 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 
-#define STRING_REQUEST_ROOT                                                 @"http://score.rs.af.cm"
+//#define STRING_REQUEST_ROOT                                       @"http://score.rs.af.cm"
+#define STRING_REQUEST_ROOT                                         @"http://scoreclips.ap01.aws.af.cm"
 
 #define TIMER_REQUEST_TIMEOUT                                               60
 

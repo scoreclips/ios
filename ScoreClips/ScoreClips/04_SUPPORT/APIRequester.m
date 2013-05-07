@@ -213,7 +213,7 @@
             }
             }
         }
-        [m_ASIRequest setValidatesSecureCertificate:NO];
+        [m_ASIRequest setValidatesSecureCertificate:NO]; 
 		[m_ASIFormRequest setTimeOutSeconds:TIMER_REQUEST_TIMEOUT];
         [m_ASIFormRequest startAsynchronous];
     }
